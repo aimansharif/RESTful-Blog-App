@@ -14,7 +14,6 @@ var blogSchema = new mongoose.Schema({
     title: String,
     image: String,
     body: String,
-    created: { type: Date, default: Date.now }
 });
 
 //MONGOOSE/MODEL CONFIG
@@ -22,7 +21,7 @@ var Blog = mongoose.model("Blog", blogSchema);
 
 // Blog.create({
 //     title: "Test Blog", 
-//     image: "https://images.unsplash.com/photo-1496871455396-14e56815f1f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
+//     image: "https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=787&q=80",
 //     body: "Hello this is a blog post"
 // });
 
@@ -31,6 +30,7 @@ app.get("/", function (req, res) {
     res.redirect("blogs");    
 });
 
+//INDEX ROUTE
 app.get("/blogs", function (req, res) {
     Blog.find({}, function (err, blogs) {
         if (err) {
@@ -41,6 +41,27 @@ app.get("/blogs", function (req, res) {
         }
     });    
 });
+
+//NEW ROUTE
+app.get("/blogs/new", function (req, res) {
+    res.render("new");    
+});
+
+//CREATE ROUTE
+app.post("/blogs", function (req, res) {
+    //create blog
+    Blog.create(req.body.blog, function (err, newBlog) {
+        if (err) {
+            res.render("new");
+        }    
+        else {
+            //redirect to the index page
+            res.redirect("/blogs");
+        }
+    });
+    
+});
+
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
