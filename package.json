@@ -12,7 +12,11 @@
     "body-parser": "^1.19.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
+<<<<<<< HEAD
     "method-override": "^3.0.0",
     "mongoose": "^5.7.1"
+=======
+    "mongoose": "^5.7.5"
+>>>>>>> 7bbfd6fc27825e5b2f264391fcf96e5a28aed531
   }
 }
