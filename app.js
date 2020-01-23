@@ -88,7 +88,7 @@ app.get("/blogs/:id/edit", function(req, res){
 });
 
 //UPDATE ROUTE
-//PUT means that it is  supposed to be updating something
+//PUT updates the blog
 app.put("/blogs/:id", function(req, res){
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
         if(err){
