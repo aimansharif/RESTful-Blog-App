@@ -1,14 +1,16 @@
-var bodyParser      = require("body-parser"),
-    methodOverride  = require("method-override"),
-    mongoose        = require("mongoose"),
-    express         = require("express"),
-    app             = express();
+var bodyParser       = require("body-parser"),
+    methodOverride   = require("method-override"),
+    mongoose         = require("mongoose"),
+    expressSanitizer = require("express-sanitizer"); 
+    express          = require("express"),
+    app              = express();
     
 //APP CONFIG
 mongoose.connect("mongodb://localhost:27017/restful_blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
 //blogSchema
@@ -21,6 +23,7 @@ var blogSchema = new mongoose.Schema({
 //MONGOOSE/MODEL CONFIG
 var Blog = mongoose.model("Blog", blogSchema);
 
+//Creates a mongoose schema- model to follow for the database
 // Blog.create({
 //     title: "Test Blog", 
 //     image: "https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=787&q=80",
@@ -51,12 +54,12 @@ app.get("/blogs/new", function (req, res) {
 
 //CREATE ROUTE
 app.post("/blogs", function (req, res) {
-    //create blog
+    //create blog and sanitize: removes risky malicious javascript input from user 
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.create(req.body.blog, function (err, newBlog) {
         if (err) {
             res.render("new");
-        }    
-        else {
+        } else {
             //redirect to the index page
             res.redirect("/blogs");
         }
@@ -90,6 +93,7 @@ app.get("/blogs/:id/edit", function(req, res){
 //UPDATE ROUTE
 //PUT updates the blog
 app.put("/blogs/:id", function(req, res){
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
         if(err){
             res.redirect("/blogs");
