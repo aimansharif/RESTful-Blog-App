@@ -6,7 +6,7 @@ var bodyParser       = require("body-parser"),
     app              = express();
     
 //APP CONFIG
-// mongoose.connect("mongodb://localhost:27017/restful_blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost:27017/restful_blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -115,7 +115,7 @@ app.delete("/blogs/:id", function(req, res){
     });
 });
 
-// var port = process.env.PORT || 3000;
-// app.listen(port, function () {
-//     console.log("Server listening on port 3000");    
-// });
+var port = process.env.PORT || 3000;
+app.listen(port, function () {
+    console.log("Server listening on port 3000");    
+});
