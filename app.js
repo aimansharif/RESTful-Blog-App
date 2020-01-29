@@ -12,7 +12,13 @@ var bodyParser       = require("body-parser"),
 
 // APP CONFIG
 mongoose.connect("mongodb+srv://aiman:aimansharif@blog-app-flysp.mongodb.net/test?retryWrites=true&w=majority", 
-    {useNewUrlParser: true, useUnifiedTopology: true
+    {useNewUrlParser: true, 
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}).then(() => {
+    console.log("Connected to DB!");
+}).catch(err => {
+    console.log("ERROR: ", err.message);
 });
 
 app.set("view engine", "ejs");
