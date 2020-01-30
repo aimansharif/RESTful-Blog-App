@@ -4,22 +4,24 @@ var bodyParser       = require("body-parser"),
     expressSanitizer = require("express-sanitizer"); 
     express          = require("express"),
     app              = express();
-    
-//APP CONFIG
-// mongoose.connect("mongodb://localhost:27017/restful_blog_app", 
-//     {useNewUrlParser: true, useUnifiedTopology: true
-// });
+
+// APP CONFIG- instead of this
+// mongoose.connect("mongodb://localhost:27017/restful_blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
+// export DATABASEURL=mongodb://localhost:27017/restful_blog_app from cmd
+
+// USE
+mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopology: true}); //process.env.DATABASEURL = mongodb://localhost:27017/restful_blog_app
 
 // APP CONFIG
-mongoose.connect("mongodb+srv://aiman:aimansharif@blog-app-flysp.mongodb.net/test?retryWrites=true&w=majority", 
-    {useNewUrlParser: true, 
-    useUnifiedTopology: true,
-    useCreateIndex: true
-}).then(() => {
-    console.log("Connected to DB!");
-}).catch(err => {
-    console.log("ERROR: ", err.message);
-});
+// mongoose.connect("mongodb+srv://aiman:aimansharif@blog-app-flysp.mongodb.net/test?retryWrites=true&w=majority", 
+//     {useNewUrlParser: true, 
+//     useUnifiedTopology: true,
+//     useCreateIndex: true
+// }).then(() => {
+//     console.log("Connected to DB!");
+// }).catch(err => {
+//     console.log("ERROR: ", err.message);
+// });
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -131,11 +133,10 @@ app.delete("/blogs/:id", function(req, res){
 
 // var port = process.env.PORT || 3000;
 // app.listen(port, function () {
-//     console.log("Server listening on port 3000");    
+//     console.log("Server listening on port " + port);    
 // });
 
 var port = process.env.PORT || 3000;
-
 app.listen(port, function () {
     console.log("PORT: " + port);
     console.log("Server listening on port " + port);    
