@@ -8,9 +8,12 @@ var bodyParser       = require("body-parser"),
 // APP CONFIG- instead of this
 // mongoose.connect("mongodb://localhost:27017/restful_blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
 // export DATABASEURL=mongodb://localhost:27017/restful_blog_app from cmd
-console.log(process.env.DATABASEURL);
+// console.log("DATABASEURL: " + process.env.DATABASEURL);
+
 // USE
-mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopology: true}); //process.env.DATABASEURL = mongodb://localhost:27017/restful_blog_app
+mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopology: true}); 
+//process.env.DATABASEURL = mongodb://localhost:27017/restful_blog_app (local)
+//process.env.DATABASEURL = mongodb+srv://aiman:aimansharif@blog-app-flysp.mongodb.net/test?retryWrites=true&w=majority (MongoAtlas environment variable)
 
 // APP CONFIG
 // mongoose.connect("mongodb+srv://aiman:aimansharif@blog-app-flysp.mongodb.net/test?retryWrites=true&w=majority", 
@@ -130,11 +133,6 @@ app.delete("/blogs/:id", function(req, res){
         }
     });
 });
-
-// var port = process.env.PORT || 3000;
-// app.listen(port, function () {
-//     console.log("Server listening on port " + port);    
-// });
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
