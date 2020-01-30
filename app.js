@@ -42,14 +42,9 @@ var blogSchema = new mongoose.Schema({
 //MONGOOSE/MODEL CONFIG
 var Blog = mongoose.model("Blog", blogSchema);
 
-//Creates a mongoose schema- model to follow for the database
-// Blog.create({
-//     title: "Test Blog", 
-//     image: "https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=787&q=80",
-//     body: "Hello this is a blog post"
-// });
-
 //RESTFUL ROUTES
+
+//Default Route
 app.get("/", function (req, res) {
     res.redirect("blogs");    
 });
@@ -134,6 +129,7 @@ app.delete("/blogs/:id", function(req, res){
     });
 });
 
+// Port that the server is listening on
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log("PORT: " + port);
