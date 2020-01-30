@@ -8,7 +8,7 @@ var bodyParser       = require("body-parser"),
 // APP CONFIG- instead of this
 // mongoose.connect("mongodb://localhost:27017/restful_blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
 // export DATABASEURL=mongodb://localhost:27017/restful_blog_app from cmd
-
+console.log(process.env.DATABASEURL);
 // USE
 mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopology: true}); //process.env.DATABASEURL = mongodb://localhost:27017/restful_blog_app
 
