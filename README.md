@@ -1,6 +1,6 @@
 # RESTful-Blog-App
 
-A Full Stack NodeJS blog application created using RESTful and ExpressJS
+A Full Stack NodeJS blog application created using RESTful routes and ExpressJS
 
 Frontend: SemanticUI, HTML, CSS, Bootstrap, Embedded JavaSript
 Backend: MongoDB, NodeJS, ExpressJS (Server-side routing), Heroku
