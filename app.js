@@ -5,13 +5,15 @@ var bodyParser       = require("body-parser"),
     express          = require("express"),
     app              = express();
 
-// APP CONFIG- instead of this
+// APP CONFIG - instead of this
 // mongoose.connect("mongodb://localhost:27017/restful_blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
-// export DATABASEURL=mongodb://localhost:27017/restful_blog_app from cmd
-// console.log("DATABASEURL: " + process.env.DATABASEURL);
+// var url = process.env.DATABASEURL || "mongodb://localhost:27017/restful_blog_app";
+
+// export DATABASEURL=mongodb://localhost:27017/restful_blog_app "from cmd"
+// console.log("DATABASEURL: " + url); // To see the url
 
 // USE
-mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopology: true}); 
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}); 
 //process.env.DATABASEURL = mongodb://localhost:27017/restful_blog_app (local)
 //process.env.DATABASEURL = mongodb+srv://aiman:aimansharif@blog-app-flysp.mongodb.net/test?retryWrites=true&w=majority (MongoAtlas environment variable)
 
